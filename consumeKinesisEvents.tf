@@ -18,6 +18,11 @@ resource "aws_lambda_event_source_mapping" "example" {
   function_name     = aws_lambda_function.consumeKinesisEvents.arn
   batch_size        = 10
   starting_position = "LATEST"
+  depends_on = [ 
+    aws_kinesis_stream.TelemetricsStream,
+    aws_lambda_function.consumeKinesisEvents,
+    aws_iam_role.lambdaRole
+   ]
 }
 
 resource "aws_lambda_permission" "KinesisPermision" {

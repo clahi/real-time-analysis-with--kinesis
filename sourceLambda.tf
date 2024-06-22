@@ -18,8 +18,8 @@ resource "aws_iam_role" "lambdaRole" {
   })
 }
 
-resource "aws_iam_policy" "lambdaPolicy" {
-  name = "lambdaPolicy"
+resource "aws_iam_policy" "mylambdaPolicy" {
+  name = "mylambdaPolicy"
   policy = jsonencode({
     "Version" : "2012-10-17",
     "Statement" : [
@@ -48,7 +48,7 @@ resource "aws_iam_policy" "lambdaPolicy" {
 resource "aws_iam_policy_attachment" "lambdaRoleAttachment" {
   name       = "lambdaRoleAttachment"
   roles      = [aws_iam_role.lambdaRole.name]
-  policy_arn = aws_iam_policy.lambdaPolicy.arn
+  policy_arn = aws_iam_policy.mylambdaPolicy.arn
 }
 
 data "archive_file" "sourceLambdaFile" {
