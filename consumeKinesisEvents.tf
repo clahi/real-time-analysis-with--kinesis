@@ -16,7 +16,7 @@ resource "aws_lambda_function" "consumeKinesisEvents" {
 resource "aws_lambda_event_source_mapping" "example" {
   event_source_arn  = aws_kinesis_stream.TelemetricsStream.arn
   function_name     = aws_lambda_function.consumeKinesisEvents.arn
-  batch_size = 10
+  batch_size        = 10
   starting_position = "LATEST"
 }
 
@@ -25,5 +25,5 @@ resource "aws_lambda_permission" "KinesisPermision" {
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.consumeKinesisEvents.function_name
   principal     = "kinesis.amazonaws.com"
-  source_arn = aws_kinesis_stream.TelemetricsStream.arn
+  source_arn    = aws_kinesis_stream.TelemetricsStream.arn
 }

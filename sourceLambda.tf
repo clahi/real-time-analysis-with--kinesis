@@ -21,33 +21,33 @@ resource "aws_iam_role" "lambdaRole" {
 resource "aws_iam_policy" "lambdaPolicy" {
   name = "lambdaPolicy"
   policy = jsonencode({
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Action": [
-				"logs:CreateLogGroup",
-				"logs:CreateLogStream",
-				"logs:PutLogEvents"
-			],
-			"Resource": "*",
-			"Effect": "Allow",
-			"Sid": "CloudWatchLogsAccess"
-		},
-		{
-			"Action": [
-				"kinesis:*"
-			],
-			"Resource": "*",
-			"Effect": "Allow",
-			"Sid": "KinesisAccess"
-		}
-	]
-})
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Action" : [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ],
+        "Resource" : "*",
+        "Effect" : "Allow",
+        "Sid" : "CloudWatchLogsAccess"
+      },
+      {
+        "Action" : [
+          "kinesis:*"
+        ],
+        "Resource" : "*",
+        "Effect" : "Allow",
+        "Sid" : "KinesisAccess"
+      }
+    ]
+  })
 }
 
 resource "aws_iam_policy_attachment" "lambdaRoleAttachment" {
-  name = "lambdaRoleAttachment"
-  roles     = [aws_iam_role.lambdaRole.name]
+  name       = "lambdaRoleAttachment"
+  roles      = [aws_iam_role.lambdaRole.name]
   policy_arn = aws_iam_policy.lambdaPolicy.arn
 }
 
@@ -64,4 +64,5 @@ resource "aws_lambda_function" "sourceLambda" {
   function_name    = "sourceLambda"
   runtime          = "python3.9"
   handler          = "sourceLambda.lambda_handler"
+  timeout = 30
 }
