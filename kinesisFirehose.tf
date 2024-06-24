@@ -54,13 +54,13 @@ resource "aws_kinesis_firehose_delivery_stream" "extended_s3_stream" {
     role_arn   = aws_iam_role.firehose_role.arn
     bucket_arn = aws_s3_bucket.myDestiBucket.arn
 
-    buffer_size = 5
+    buffer_size     = 5
     buffer_interval = 60
   }
 
   kinesis_source_configuration {
-    kinesis_stream_arn  = aws_kinesis_stream.TelemetricsStream.arn
-    role_arn            = aws_iam_role.firehose_role.arn
+    kinesis_stream_arn = aws_kinesis_stream.TelemetricsStream.arn
+    role_arn           = aws_iam_role.firehose_role.arn
   }
 
   tags = {

@@ -64,5 +64,5 @@ resource "aws_lambda_function" "sourceLambda" {
   function_name    = "sourceLambda"
   runtime          = "python3.9"
   handler          = "sourceLambda.lambda_handler"
-  timeout = 30
+  timeout          = 30
 }
